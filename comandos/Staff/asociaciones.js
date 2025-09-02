@@ -171,7 +171,7 @@ if (!asociations.categories.includes(canal.parentId)) {
           });
   
           if (resultado.deletedCount > 0) {
-            return interaction.reply(`Canal ${canal} eliminado correctamente.`);
+            return interaction.reply(`Canal ${canal} desasignado correctamente.`);
           } else {
             return interaction.reply("No se encontró el canal en tus asociaciones.");
           }
