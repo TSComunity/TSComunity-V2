@@ -322,15 +322,7 @@ async function borrarMensajes() {
 borrarMensajes()
 
 
-<<<<<<< HEAD
 const tareasAsociaciones = require('./Esquemas/tareasAsociaciones.js')
-=======
-const tareasAsociaciones = require('./Esquemas/tareasAsociaciones.js'); // Asegúrate de usar la ruta correcta
->>>>>>> 7436409ddb26555b0f212ef716f3d054cc0c4a10
-
-tareasAsociaciones.deleteMany({})
-  .then(() => console.log("Tareas borradas"))
-  .catch(err => console.error("Error al borrar tareas:", err));
 
 setInterval(async () => {
   try {
