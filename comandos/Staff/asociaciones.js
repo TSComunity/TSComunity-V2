@@ -14,6 +14,9 @@ module.exports = {
           .setName("agregar")
           .setDescription("Crea y asocia un canal de texto a tu lista.")
           .addStringOption((option) =>
+            option.setName("emoji").setDescription("El emoji del canal a crear.").setRequired(true)
+          )
+          .addStringOption((option) =>
             option.setName("nombre").setDescription("El nombre del canal a crear.").setRequired(true)
           )
           .addChannelOption((option) =>
@@ -98,6 +101,7 @@ module.exports = {
             });
           }
 
+          const emoji = interaction.options.getString("emoji");
           const nombre = interaction.options.getString("nombre");
           const categoria = interaction.options.getChannel("categoria");
           const renovacion = interaction.options.getNumber("renovacion-dias");
@@ -112,7 +116,7 @@ module.exports = {
 
           // Crear el canal en la categoría especificada
           const canal = await interaction.guild.channels.create({
-            name: nombre,
+            name: `「${emoji}」${nombre}`,
             type: 0, // Tipo de canal de texto
             parent: categoria.id,
           });
