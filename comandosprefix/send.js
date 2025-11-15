@@ -60,22 +60,7 @@ module.exports = {
             },
             {
                 name: "3 Warns <:warn:1385557884548546640>",
-                value: "24 horas mute <:mute:1385557781721120880>",
-                inline: true,
-            },
-            {
-                name: "4 Warns <:warn:1385557884548546640>",
-                value: "72 horas mute <:mute:1385557781721120880>",
-                inline: true,
-            },
-            {
-                name: "5 Warns <:warn:1385557884548546640>",
                 value: "Baneo <a:ban:1385557552724709516>",
-                inline: true,
-            },
-            {
-                name: "** **",
-                value: "** **",
                 inline: true,
             },
             {
