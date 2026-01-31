@@ -556,6 +556,6 @@ borrarMensajes()
 // limpiarDuplicados();
 // }, 10 * 60 * 1000); // Cada 10 minutos
 
-const tagRoleManager = require("./Funciones/tagRole");
+// const tagRoleManager = require("./Funciones/tagRole");
 
-tagRoleManager(client, "1380229272316154027");
+// tagRoleManager(client, "1380229272316154027");
