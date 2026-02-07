@@ -54,9 +54,9 @@ module.exports = async function actualizarClubes(client) {
                         `<:CoronaAzulao:1237349756347613185> **[${club.name}](https://brawltime.ninja/es/club/${clubTag.replace('#', '')})**\n` +
                         `<:copa:1467126361864016025> \`${club.trophies.toLocaleString()}\`\n` +
                         `${globalRanking}${localRanking}` +
-                        `<:Presidente:1394255607934226473> [${presiName}](https://brawltime.ninja/es/profile/${presi.tag.replace('#', '')})\n` +
+                        `<:presi:1467129797992906917> [${presiName}](https://brawltime.ninja/es/profile/${presi.tag.replace('#', '')})\n` +
                         `<:req:1385558827826544640> \`${club.requiredTrophies.toLocaleString()}\`\n` +
-                        `<:Miembros:1394255798930247801> \`${club.members.length}\`\n` +
+                        `<:members:1467129799771426931> \`${club.members.length}\`\n` +
                         `${tipo}`,
                     trophies: club.trophies
                 });
@@ -86,10 +86,10 @@ module.exports = async function actualizarClubes(client) {
             .setThumbnail(client.user.avatarURL())
             .addFields(
                 { name: 'Total Trofeos:', value: `<:copa:1467126361864016025> \`${totalCopas.toLocaleString()}\``, inline: true },
-                { name: 'Total Clubs:', value: `<:Club:1467114516851720266> \`${totalClubes}\``, inline: true },
-                { name: 'Total Miembros:', value: `<:Miembros:1394255798930247801> \`${totalMiembros}\``, inline: true },
+                { name: 'Total Clubs:', value: `<:club:1467133380905795848> \`${totalClubes}\``, inline: true },
+                { name: 'Total Miembros:', value: `<:members:1467129799771426931> \`${totalMiembros}\``, inline: true },
                 { name: 'Promedio Trofeos:', value: `<:copa:1467126361864016025> \`${Math.round(totalCopas / totalClubes).toLocaleString()}\``, inline: true },
-                { name: 'Total Vices:', value: `<:Vice:1394255693305085994> \`${totalVices}\``, inline: true },
+                { name: 'Total Vices:', value: `<:vice:1467129801281376362> \`${totalVices}\``, inline: true },
                 { name: 'Total Veteranos:', value: `<:vete:1467126232326868992> \`${totalVeteranos}\``, inline: true }
             )
             .setColor('#822ffd');

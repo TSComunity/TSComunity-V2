@@ -21,6 +21,10 @@ module.exports = {
         .setColor('#852ffd')
         .setThumbnail(client.user.avatarURL())
         .setDescription('### Recordatorio\nUsa el ping <@&1180483997281824768> para buscar gente con la que jugar a Brawl Stars. No abuses del ping, avisa antes de unirte a equipos y respeta a todos, independientemente de su nivel.')
+        .addFields(
+          { name: 'Ping a usar', value: '<@&1180483997281824768>', inline: true },
+          { name: 'Llamadadas en', value: '<#1163777101426597948>', inline: true }
+        )
       // Try to delete the previous message if it exists
       if (lastMsgId) {
         try {
