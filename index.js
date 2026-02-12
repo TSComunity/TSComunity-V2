@@ -26,7 +26,7 @@ const { loadCommands } = require("./Handlers/cargarComandos");
 const { loadPrefix } = require('./Handlers/cargarPrefix');
 const process = require('node:process');
 const token = process.env.TOKEN;
-
+console.log('a')
 process.on('unhandledRejection', async (reason, promise) => {
   console.log('Unhandled Rejection error at:', promise, 'reason', reason);
 });
@@ -58,8 +58,9 @@ const client = new Client({
 client.commands = new Collection();
 client.prefixs = new Collection();
 client.aliases = new Collection();
-
+console.log('b')
 client.login(token).then(async () => {
+  console.log('c')
   loadEvents(client);
   loadCommands(client);
   loadPrefix(client);
@@ -68,90 +69,9 @@ client.login(token).then(async () => {
 module.exports = client;
 
 const BRAWL_STARS_API_KEY = process.env.BS_APIKEY
-// async function fetchPlayerStats(playerTag) {
-//     try {
-//         const response = await axios.get(`https://api.brawlstars.com/v1/players/${encodeURIComponent(playerTag)}`, {
-//             headers: {
-//                 'Authorization': `Bearer ${BRAWL_STARS_API_KEY}`
-//             }
-//         });
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error al obtener los datos del jugador:', error);
-//         throw error;
-//     }
-// }
-
-// // Función para crear la imagen de las estadísticas
-// async function createStatsImage(playerData) {
-//     const width = 800;
-//     const height = 400;
-//     const canvas = Canvas.createCanvas(width, height);
-//     const context = canvas.getContext('2d');
-
-//     // Cargar fondo
-//     context.fillStyle = '#1E1E1E';
-//     context.fillRect(0, 0, width, height);
-
-//     // Posición y tamaño del ícono de jugador
-//     const iconSize = 50;
-//     const iconX = 50;
-//     const iconY = 40;
-
-//     // Obtener y cargar el ícono del jugador desde el CDN
-//     if (playerData.icon && playerData.icon.id) {
-//         const iconURL = `https://cdn.brawlify.com/profile-icons/regular/${playerData.icon.id}.png`; // Usamos el CDN para obtener la imagen
-//         try {
-//             const response = await axios.get(iconURL, { responseType: 'arraybuffer' });
-//             const buffer = Buffer.from(response.data, 'binary');
-//             const playerIcon = await Canvas.loadImage(buffer);
-//             context.drawImage(playerIcon, iconX, iconY, iconSize, iconSize);
-//         } catch (error) {
-//             console.error('Error al obtener el ícono del jugador:', error);
-//         }
-//     }
-
-//     // Texto del nombre del jugador con el ícono al lado
-//     context.font = 'bold 30px sans-serif';
-//     context.fillStyle = '#FFFFFF';
-//     context.fillText(`Estadísticas de ${playerData.name}`, iconX + iconSize + 20, iconY + 35);
-
-//     // Agregar estadísticas del jugador
-//     context.font = '20px sans-serif';
-//     context.fillText(`Trofeos: ${playerData.trophies}`, 50, 150);
-//     context.fillText(`Nivel de experiencia: ${playerData.expLevel}`, 50, 200);
-//     context.fillText(`Victorias 3v3: ${playerData['3vs3Victories']}`, 50, 250);
-//     context.fillText(`Victorias en Solo: ${playerData.soloVictories}`, 50, 300);
-//     context.fillText(`Victorias en Duo: ${playerData.duoVictories}`, 50, 350);
-
-//     return canvas.toBuffer();
-// }
-
-// client.on('messageCreate', async message => {
-//     if (message.content.startsWith('>>stats')) {
-//         const args = message.content.split(' ');
-//         const playerTag = args[1];
-
-//         if (!playerTag) {
-//             return message.reply('Por favor, proporciona un tag de jugador. Ejemplo: `!stats #PLAYER_TAG`');
-//         }
-
-//         try {
-//             const playerData = await fetchPlayerStats(playerTag);
-//             const imageBuffer = await createStatsImage(playerData);
-
-//             // Enviamos la imagen usando AttachmentBuilder
-//             const attachment = new AttachmentBuilder(imageBuffer, { name: 'stats.png' });
-//             message.channel.send({ files: [attachment] });
-//         } catch (error) {
-//             console.error(error);
-//             message.reply('Hubo un error al obtener las estadísticas del jugador.');
-//         }
-//     }
-// })
 
 const actualizarClubes = require('./Funciones/actualizarClubes.js');
-setInterval(() => actualizarClubes(client), 10000);
+setInterval(() => actualizarClubes(client), 1000 * 60 * 15);
 
 const Schema = require('./Esquemas/clubsSchema.js')
 setInterval(async () => {
@@ -268,26 +188,7 @@ message.edit(`
 
 ### 📨 ¡INTERESADOS AL MD!
 `)
-}, 60000)
-
-// const actualizarListaAsociaciones = require('./Funciones/actualizarAsociaciones.js')
-// setInterval(async () => await actualizarListaAsociaciones(client), 100000);
-
-// const ordenarAsociaciones = require('./Funciones/ordenarAsociaciones.js')
-// setInterval(async () => await ordenarAsociaciones(client), 1000 * 60 * 15);
-
-// client.on('interactionCreate', async interaction => {
-//   if (interaction.isAutocomplete()) {
-//    const command = client.commands.get(interaction.commandName);
-//     if (!command || !command.autocomplete) return;
-//     try {
-//       await command.autocomplete(interaction);
-//     } catch (error) {
-//       console.error('❌ Error en autocompletado:', error);
-//     }
-//   }
-// });
-
+}, 1000 * 60 * 15)
 
 // CANALES PARA BORRAR MENSAJES BORrAR EL DE HALLOWEEN
 const canales = ['1112754769472270449']
@@ -322,240 +223,228 @@ async function borrarMensajes() {
 borrarMensajes()
 
 
-// const tareasAsociaciones = require('./Esquemas/tareasAsociaciones.js')
+const TAG       = "TS"
+const ROLE_ID   = "1380228270729199798"
+const ROLE_NAME = "Etiqueta TS"
+const GUILD_ID  = "1093864130030612521"
+const THREAD_ID = "1470813578964504656"
+const EMOJI     = "<:tag:1470863668051837059>"
 
-// setInterval(async () => {
-//   try {
-//     const { EmbedBuilder } = require('discord.js');
-    
-//     // ==========================================
-//     // CONFIGURACIÓN
-//     // ==========================================
-//     const CONFIG = {
-//       REMINDER_INTERVAL_DAYS: 2,
-//       MAX_REMINDERS_PER_CYCLE: 5,
-//       MAX_TOTAL_REMINDERS: 10,
-//       STAFF_ROLES: ['1106553480803516437', '1107345436492185753', '1106553536839422022', '1363927756617941154', '1202685031219200040', '1107329826982989906', '1107331844866846770']
-//     };
+const REQUEST_DELAY = 800
 
-//     // ==========================================
-//     // FUNCIÓN: Verificar si usuario es staff
-//     // ==========================================
-//     async function isUserStillStaff(userId, guildId) {
-//       try {
-//         const guild = client.guilds.cache.get(guildId);
-//         if (!guild) return false;
-        
-//         const member = await guild.members.fetch(userId).catch(() => null);
-//         if (!member) return false;
-        
-//         return member.roles.cache.some(role => 
-//           CONFIG.STAFF_ROLES.some(staffRole => 
-//             role.id.toLowerCase().includes(staffRole.toLowerCase())
-//           )
-//         );
-//       } catch (error) {
-//         console.error(`Error verificando staff ${userId}:`, error);
-//         return false;
-//       }
-//     }
+let clientRef    = null
+let guildRef     = null
+let threadRef    = null
+let membersArray = []
+let scanIndex    = 0
+let scanRunning  = false
 
-//     // ==========================================
-//     // FUNCIÓN: Crear embed
-//     // ==========================================
-//     function createRenewalEmbed(channelId, isFirstTime = false) {
-//       const embed = new EmbedBuilder()
-//         .setColor(isFirstTime ? '#ff9500' : '#ff3333')
-//         .setTitle(isFirstTime ? '🔔 ¡Hora de Renovar!' : '⚠️ Recordatorio de Renovación')
-//         .setDescription(
-//           isFirstTime 
-//             ? `Ya es posible renovar la asociación <#${channelId}>.\n\n**¡Es tu responsabilidad renovarla!**`
-//             : `Recordatorio: Aún no has renovado la asociación <#${channelId}>.\n\n**Por favor, renuévala lo antes posible.**`
-//         )
-//         .setFooter({ 
-//           text: isFirstTime 
-//             ? 'Recibirás recordatorios cada 2 días si no renuevas'
-//             : `Recordatorio #${Math.floor(Math.random() * 10) + 1} - Sistema automático`
-//         })
-//         .setTimestamp();
-      
-//       return embed;
-//     }
+const processing    = new Set()
+const priorityQueue = []
 
-//     // ==========================================
-//     // LÓGICA PRINCIPAL
-//     // ==========================================
-//     const tasks = await tareasAsociaciones.find({});
-//     const now = Date.now();
-//     let processedCount = 0;
+const sleep = ms => new Promise(r => setTimeout(r, ms))
 
-//     console.log(`🔍 [${new Date().toLocaleTimeString()}] Verificando ${tasks.length} tareas...`);
+async function fetchTag(userId) {
+  while (true) {
+    try {
+      const res = await axios.get(
+        `https://discord.com/api/v10/users/${userId}`,
+        { headers: { Authorization: `Bot ${clientRef.token}` } }
+      )
+      return res.data.primary_guild || res.data.clan || null
+    } catch (err) {
+      if (err.response?.status === 429) {
+        const retry = err.response.data?.retry_after ?? 1
+        console.warn(`[TAG] Rate limit en ${userId}, esperando ${retry}s`)
+        await sleep(retry * 1000 + 100)
+        continue
+      }
+      return null
+    }
+  }
+}
 
-//     for (const task of tasks) {
-//       try {
-//         // Verificar si ya venció
-//         const expirationTime = new Date(task.expirationDate).getTime();
-//         if (expirationTime > now) continue;
+async function applyRole(member, hasCorrectTag) {
+  const hasRole = member.roles.cache.has(ROLE_ID)
 
-//         // Verificar si el canal existe
-//         const channel = client.channels.cache.get(task.channelId);
-//         if (!channel) {
-//           await tareasAsociaciones.deleteOne({ _id: task._id });
-//           continue;
-//         }
+  if (hasCorrectTag && !hasRole) {
+    await member.roles.add(ROLE_ID).catch(() => {})
+    console.log(`[TAG] + Rol añadido a ${member.user.tag}`)
 
-//         // Verificar si el usuario sigue siendo staff
-//         const guildId = channel.guild.id;
-//         const isStillStaff = await isUserStillStaff(task.userId, guildId);
-//         if (!isStillStaff) {
-//           await tareasAsociaciones.deleteOne({ _id: task._id });
-//           continue;
-//         }
+    try {
+      await member.send({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(0x2ecc71)
+            .setAuthor({
+              name: interaction.guild.name,
+              iconURL: interaction.guild.iconURL()
+            })
+            .setDescription(
+              `### ${EMOJI} Etiqueta detectada\n` +
+              `Se te ha otorgado el rol **${ROLE_NAME}** por tener la etiqueta ${EMOJI} **${TAG}**`
+            )
+            .setTimestamp()
+        ]
+      })
+    } catch (err) {
+      // Usuario con DMs cerrados, ignoramos
+    }
 
-//         // Obtener usuario
-//         const user = await client.users.fetch(task.userId).catch(() => null);
-//         if (!user) {
-//           console.log(`❌ Usuario ${task.userId} no encontrado, eliminando tarea...`);
-//           await tareasAsociaciones.deleteOne({ _id: task._id });
-//           continue;
-//         }
+    if (threadRef) {
+      await threadRef.send({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(0x2ecc71)
+            .setDescription(
+              `### ${EMOJI} Etiqueta establecida\n` +
+              `Rol <@&${ROLE_ID}> otorgado a <@${member.user.id}> por tener la etiqueta ${EMOJI} **${TAG}**`
+            )
+            .setTimestamp()
+        ]
+      }).catch(() => {})
+    }
+  }
 
-//         // Limitar procesamiento por ciclo
-//         if (processedCount >= CONFIG.MAX_REMINDERS_PER_CYCLE) {
-//           console.log(`⚠️ Límite de ${CONFIG.MAX_REMINDERS_PER_CYCLE} recordatorios alcanzado`);
-//           break;
-//         }
+  if (!hasCorrectTag && hasRole) {
+    await member.roles.remove(ROLE_ID).catch(() => {})
+    console.log(`[TAG] - Rol quitado a ${member.user.tag}`)
 
-//         // ==========================================
-//         // CASO 1: PRIMERA NOTIFICACIÓN
-//         // ==========================================
-//         if (!task.firstNotified) {
-//           try {
-//             const embed = createRenewalEmbed(task.channelId, true);
-            
-//             await user.send({
-//               content: `<@${task.userId}>`,
-//               embeds: [embed]
-//             });
+    // DM al usuario
+    try {
+      await member.send({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(0xe74c3c)
+            .setAuthor({
+              name: interaction.guild.name,
+              iconURL: interaction.guild.iconURL()
+            })
+            .setDescription(
+              `${EMOJI} Etiqueta eliminada\n` +
+              `Se te ha retirado el rol **${ROLE_NAME}** por no tener la etiqueta ${EMOJI} **${TAG}**`
+            )
+            .setTimestamp()
+        ]
+      })
+    } catch (err) {
+      // Ignoramos si no se puede enviar el MD
+    }
 
-//             await tareasAsociaciones.updateOne(
-//               { _id: task._id },
-//               { 
-//                 $set: { 
-//                   firstNotified: new Date(),
-//                   lastNotified: new Date(),
-//                   reminderCount: 1
-//                 } 
-//               }
-//             );
+    if (threadRef) {
+      await threadRef.send({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(0xe74c3c)
+            .setDescription(
+              `### ${EMOJI} Etiqueta retirada\n` +
+              `Rol <@&${ROLE_ID}> retirado a <@${member.user.id}> por no tener la etiqueta ${EMOJI} **${TAG}**`
+            )
+            .setTimestamp()
+        ]
+      }).catch(() => {})
+    }
+  }
+}
 
-//             console.log(`📧 Primera notificación enviada para canal ${task.channelId}`);
-//             processedCount++;
+async function verifyMember(member) {
+  if (!member || member.user?.bot) return
+  if (processing.has(member.id)) return
 
-//           } catch (error) {
-//             console.error(`❌ Error primera notificación canal ${task.channelId}:`, error);
-//           }
-//           continue;
-//         }
+  processing.add(member.id)
+  try {
+    const tagData = await fetchTag(member.id)
 
-//         // ==========================================
-//         // CASO 2: RECORDATORIOS PERIÓDICOS
-//         // ==========================================
-//         const lastNotified = task.lastNotified ? new Date(task.lastNotified).getTime() : 0;
-//         const daysSinceLastReminder = Math.floor((now - lastNotified) / (1000 * 60 * 60 * 24));
-//         const reminderCount = task.reminderCount || 0;
+    await member.fetch().catch(() => {})
 
-//         // Verificar si toca enviar recordatorio
-//         if (daysSinceLastReminder >= CONFIG.REMINDER_INTERVAL_DAYS && reminderCount < CONFIG.MAX_TOTAL_REMINDERS) {
-//           try {
-//             const embed = createRenewalEmbed(task.channelId, false);
-            
-//             await user.send({
-//               content: `<@${task.userId}>`,
-//               embeds: [embed]
-//             });
+    const hasCorrectTag =
+      tagData?.tag === TAG &&
+      tagData?.identity_guild_id === GUILD_ID
 
-//             await tareasAsociaciones.updateOne(
-//               { _id: task._id },
-//               { 
-//                 $set: { 
-//                   lastNotified: new Date()
-//                 },
-//                 $inc: {
-//                   reminderCount: 1
-//                 }
-//               }
-//             );
+    await applyRole(member, hasCorrectTag)
+  } catch (err) {
+    console.error(`[TAG] Error verificando ${member?.user?.tag}:`, err.message)
+  } finally {
+    processing.delete(member.id)
+  }
+}
 
-//             console.log(`🔔 Recordatorio #${reminderCount + 1} enviado para canal ${task.channelId}`);
-//             processedCount++;
+async function mainLoop() {
+  if (scanRunning) return
+  scanRunning = true
 
-//           } catch (error) {
-//             console.error(`❌ Error recordatorio canal ${task.channelId}:`, error);
-//           }
-//         }
-//         // Si ya alcanzó el máximo de recordatorios, informar pero no eliminar
-//         else if (reminderCount >= CONFIG.MAX_TOTAL_REMINDERS) {
-//           console.log(`⚠️ Canal ${task.channelId} alcanzó máximo de recordatorios (${CONFIG.MAX_TOTAL_REMINDERS})`);
-//         }
+  console.log("[TAG] Motor iniciado")
 
-//       } catch (taskError) {
-//         console.error(`❌ Error procesando tarea ${task._id}:`, taskError);
-//       }
-//     }
+  while (true) {
+    let member = null
 
-//     // ==========================================
-//     // LIMPIEZA ADICIONAL (cada 6 horas aprox)
-//     // ==========================================
-//     const shouldCleanup = Math.random() < 0.027; // ~1/37 probabilidad = cada ~6 horas
-//     if (shouldCleanup) {
-//       console.log('🧹 Ejecutando limpieza adicional...');
-      
-//       const allTasks = await tareasAsociaciones.find({});
-//       let cleanedCount = 0;
+    if (priorityQueue.length > 0) {
+      const id = priorityQueue.shift()
+      member = guildRef.members.cache.get(id)
+        ?? await guildRef.members.fetch(id).catch(() => null)
+    }
 
-//       for (const task of allTasks) {
-//         const channel = client.channels.cache.get(task.channelId);
-//         if (!channel) {
-//           await tareasAsociaciones.deleteOne({ _id: task._id });
-//           cleanedCount++;
-//         }
-//       }
+    if (!member) {
+      if (scanIndex >= membersArray.length) {
+        scanIndex = 0
+        membersArray = [...guildRef.members.cache.values()].filter(m => !m.user.bot)
+        console.log(`[TAG] Nuevo ciclo — ${membersArray.length} miembros`)
+      }
 
-//       if (cleanedCount > 0) {
-//         console.log(`🗑️ Limpieza completada: ${cleanedCount} tareas eliminadas`);
-//       }
-//     }
+      member = membersArray[scanIndex]
+      scanIndex++
+    }
 
-//     console.log(`✅ [${new Date().toLocaleTimeString()}] Verificación completada. ${processedCount} notificaciones enviadas.`);
+    if (member) await verifyMember(member)
 
-//   } catch (error) {
-//     console.error('❌ Error general en sistema de renovación:', error);
-//   }
+    await sleep(REQUEST_DELAY)
+  }
+}
 
-//   // Script de limpieza - ejecutar UNA VEZ
-// const tareasAsociaciones = require('./Esquemas/tareasAsociaciones.js');
+function enqueuePriority(id) {
+  if (!priorityQueue.includes(id) && !processing.has(id)) {
+    priorityQueue.unshift(id)
+  }
+}
 
-// async function limpiarDuplicados() {
-//   const tareas = await tareasAsociaciones.find({});
-//   const canalesVistos = new Set();
-//   let eliminadas = 0;
+async function tagRoleManager(client) {
+  clientRef = client
 
-//   for (const tarea of tareas) {
-//     if (canalesVistos.has(tarea.channelId)) {
-//       await tareasAsociaciones.deleteOne({ _id: tarea._id });
-//       eliminadas++;
-//     } else {
-//       canalesVistos.add(tarea.channelId);
-//     }
-//   }
+  guildRef = await client.guilds.fetch(GUILD_ID)
+  await guildRef.members.fetch()
 
-//   console.log(`🧹 Limpieza completada: ${eliminadas} tareas duplicadas eliminadas`);
-// }
+  membersArray = [...guildRef.members.cache.values()].filter(m => !m.user.bot)
+  console.log(`[TAG] Iniciado — ${membersArray.length} miembros`)
 
-// limpiarDuplicados();
-// }, 10 * 60 * 1000); // Cada 10 minutos
+  threadRef = await client.channels.fetch(THREAD_ID).catch(() => null)
+  if (!threadRef) console.warn("[TAG] Thread de log no encontrado")
 
-// const tagRoleManager = require("./Funciones/tagRole");
+  client.on("messageCreate", msg => {
+    if (!msg.inGuild() || msg.guild.id !== GUILD_ID) return
+    if (msg.author.bot) return
+    enqueuePriority(msg.author.id)
+  })
 
-// tagRoleManager(client, "1380229272316154027");
+  client.on("guildMemberUpdate", (_, newMember) => {
+    if (newMember.guild.id !== GUILD_ID) return
+    enqueuePriority(newMember.id)
+  })
+
+  client.on("guildMemberAdd", member => {
+    if (member.guild.id !== GUILD_ID) return
+    membersArray.push(member)
+    enqueuePriority(member.id)
+  })
+
+  client.on("guildMemberRemove", member => {
+    if (member.guild.id !== GUILD_ID) return
+    membersArray = membersArray.filter(m => m.id !== member.id)
+  })
+
+  mainLoop()
+}
+
+client.once('ready', () => {
+  console.log(`[BOT] Listo como ${client.user.tag}`);
+  tagRoleManager(client);
+});
